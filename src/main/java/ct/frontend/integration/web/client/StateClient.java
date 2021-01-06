@@ -1,6 +1,6 @@
 package ct.frontend.integration.web.client;
 
-import ct.frontend.integration.protobuf.Protos;
+import ct.coreapi.common.Protos;
 import ct.frontend.integration.web.HttpProps;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

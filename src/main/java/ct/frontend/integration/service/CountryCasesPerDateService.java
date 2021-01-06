@@ -2,7 +2,7 @@ package ct.frontend.integration.service;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.util.JsonFormat;
-import ct.frontend.integration.protobuf.Protos;
+import ct.coreapi.common.Protos;
 import ct.frontend.integration.web.client.CountryCasesPerDateClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
