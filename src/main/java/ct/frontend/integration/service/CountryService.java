@@ -1,11 +1,12 @@
 package ct.frontend.integration.service;
 
 import com.google.protobuf.InvalidProtocolBufferException;
-import com.google.protobuf.util.JsonFormat;
-import ct.coreapi.common.Protos;
 import ct.frontend.integration.web.client.CountryClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+
+import static coronavirus.tracker.core.api.CoronavirusTrackerCoreProtos.Countries;
+import static coronavirus.tracker.core.api.CoronavirusTrackerCoreProtos.Country;
 
 @Component
 @RequiredArgsConstructor
@@ -13,13 +14,11 @@ public class CountryService {
 
     private final CountryClient countryClient;
 
-    public String getCountries() throws InvalidProtocolBufferException {
-        Protos.Countries countries = countryClient.getCountries();
-        return JsonFormat.printer().includingDefaultValueFields().print(countries);
+    public Countries getCountries() {
+        return countryClient.getCountries();
     }
 
-    public String getCountry(String countryName) throws InvalidProtocolBufferException {
-        Protos.Country country = countryClient.getCountry(countryName);
-        return JsonFormat.printer().includingDefaultValueFields().print(country);
+    public Country getCountry(String countryName) {
+        return countryClient.getCountry(countryName);
     }
 }

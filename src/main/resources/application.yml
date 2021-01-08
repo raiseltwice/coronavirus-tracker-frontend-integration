@@ -2,5 +2,4 @@ server:
   port: 8081
 
 app:
-  client:
-    url: "http://localhost:8080"
+  client-url: "http://localhost:8080"

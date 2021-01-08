@@ -1,27 +1,31 @@
 package ct.frontend.integration.controller;
 
-import com.google.protobuf.InvalidProtocolBufferException;
-import ct.frontend.integration.service.CountryService;
+import ct.frontend.integration.web.client.CountryClient;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import static coronavirus.tracker.core.api.CoronavirusTrackerCoreProtos.Countries;
+import static coronavirus.tracker.core.api.CoronavirusTrackerCoreProtos.Country;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(produces = "application/json")
 public class CountryController {
 
-    private final CountryService countryService;
+    private final CountryClient countryService;
 
     @GetMapping("/countries")
-    public String getCountries() throws InvalidProtocolBufferException {
-        return countryService.getCountries();
+    public ResponseEntity<Countries> getCountries() {
+        return new ResponseEntity<>(countryService.getCountries(), HttpStatus.OK);
     }
 
     @GetMapping("/countries/{countryName}")
-    public String getCountry(@PathVariable String countryName) throws InvalidProtocolBufferException {
-        return countryService.getCountry(countryName);
+    public ResponseEntity<Country> getCountry(@PathVariable String countryName) {
+        return new ResponseEntity<>(countryService.getCountry(countryName), HttpStatus.OK);
     }
 }

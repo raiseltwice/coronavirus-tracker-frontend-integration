@@ -1,25 +1,29 @@
 package ct.frontend.integration.web.client;
 
-import ct.coreapi.common.Protos;
-import ct.frontend.integration.web.HttpProps;
+import ct.frontend.integration.config.AppProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
+
+import static coronavirus.tracker.core.api.CoronavirusTrackerCoreProtos.CasesPerDate;
+import static coronavirus.tracker.core.api.CoronavirusTrackerCoreProtos.CasesPerDateCollection;
 
 @Component
 @RequiredArgsConstructor
 public class CountryCasesPerDateClient {
 
-    private final HttpProps httpProps;
+    private final RestTemplate restTemplate;
+    private final AppProperties appProperties;
 
-    public Protos.CasesPerDateCollection getCountryCasesPerDateCollection(String countryName) {
-        return httpProps.getRestTemplate().getForObject(
-                String.format(httpProps.getUrl() + "/countries/%s/cases-per-date", countryName),
-                Protos.CasesPerDateCollection.class);
+    public CasesPerDateCollection getCountryCasesPerDateCollection(String countryName) {
+        return restTemplate.getForObject(
+                String.format(appProperties.getClientUrl() + "/countries/%s/cases-per-date", countryName),
+                CasesPerDateCollection.class);
     }
 
-    public Protos.CasesPerDate getCountryCasesPerDate(String countryName, String date) {
-        return httpProps.getRestTemplate().getForObject(
-                String.format(httpProps.getUrl() + "/countries/%s/cases-per-date/%s", countryName, date),
-                Protos.CasesPerDate.class);
+    public CasesPerDate getCountryCasesPerDate(String countryName, String date) {
+        return restTemplate.getForObject(
+                String.format(appProperties.getClientUrl() + "/countries/%s/cases-per-date/%s", countryName, date),
+                CasesPerDate.class);
     }
 }

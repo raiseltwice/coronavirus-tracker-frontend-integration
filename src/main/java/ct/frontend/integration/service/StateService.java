@@ -1,12 +1,12 @@
 package ct.frontend.integration.service;
 
 import com.google.protobuf.InvalidProtocolBufferException;
-import com.google.protobuf.util.JsonFormat;
-import ct.coreapi.common.Protos;
-import ct.frontend.integration.web.client.CountryClient;
 import ct.frontend.integration.web.client.StateClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+
+import static coronavirus.tracker.core.api.CoronavirusTrackerCoreProtos.State;
+import static coronavirus.tracker.core.api.CoronavirusTrackerCoreProtos.States;
 
 @Component
 @RequiredArgsConstructor
@@ -14,13 +14,11 @@ public class StateService {
 
     private final StateClient stateClient;
 
-    public String getStates(String countryName) throws InvalidProtocolBufferException {
-        Protos.States countries = stateClient.getStates(countryName);
-        return JsonFormat.printer().includingDefaultValueFields().print(countries);
+    public States getStates(String countryName) {
+        return stateClient.getStates(countryName);
     }
 
-    public String getState(String countryName, String stateName) throws InvalidProtocolBufferException {
-        Protos.State state = stateClient.getState(countryName, stateName);
-        return JsonFormat.printer().includingDefaultValueFields().print(state);
+    public State getState(String countryName, String stateName) {
+        return stateClient.getState(countryName, stateName);
     }
 }

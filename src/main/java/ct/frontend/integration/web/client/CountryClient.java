@@ -1,23 +1,27 @@
 package ct.frontend.integration.web.client;
 
-import ct.coreapi.common.Protos;
-import ct.frontend.integration.web.HttpProps;
+import ct.frontend.integration.config.AppProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
+
+import static coronavirus.tracker.core.api.CoronavirusTrackerCoreProtos.Countries;
+import static coronavirus.tracker.core.api.CoronavirusTrackerCoreProtos.Country;
 
 @Component
 @RequiredArgsConstructor
 public class CountryClient {
 
-    private final HttpProps httpProps;
+    private final RestTemplate restTemplate;
+    private final AppProperties appProperties;
 
-    public Protos.Countries getCountries() {
-        return httpProps.getRestTemplate().getForObject(httpProps.getUrl() + "/countries", Protos.Countries.class);
+    public Countries getCountries() {
+        return restTemplate.getForObject(appProperties.getClientUrl() + "/countries", Countries.class);
     }
 
-    public Protos.Country getCountry(String countryName) {
-        return httpProps.getRestTemplate().getForObject(
-                String.format(httpProps.getUrl() + "/countries/%s", countryName),
-                Protos.Country.class);
+    public Country getCountry(String countryName) {
+        return restTemplate.getForObject(
+                String.format(appProperties.getClientUrl() + "/countries/%s", countryName),
+                Country.class);
     }
 }
