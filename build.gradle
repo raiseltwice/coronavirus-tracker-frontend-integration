@@ -23,7 +23,7 @@ dependencies {
     // commons
     compile group: 'org.apache.commons', name: 'commons-lang3'
     implementation 'com.github.raiseltwice:coronavirus-tracker-entity-common:1.14'
-    implementation 'com.github.raiseltwice:coronavirus-tracker-core-api:1.10'
+    implementation 'com.github.raiseltwice:coronavirus-tracker-core-api:1.11'
 
     // lombok
     compileOnly 'org.projectlombok:lombok:1.18.16'

@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import static coronavirus.tracker.core.api.CoronavirusTrackerCoreProtos.Countries;
-import static coronavirus.tracker.core.api.CoronavirusTrackerCoreProtos.Country;
+import static coronavirus.tracker.core.api.CoronavirusTrackerCoreProtos.CountriesDTO;
+import static coronavirus.tracker.core.api.CoronavirusTrackerCoreProtos.CountryDTO;
 
 @RestController
 @RequiredArgsConstructor
@@ -20,12 +20,12 @@ public class CountryController {
     private final CountryClient countryService;
 
     @GetMapping("/countries")
-    public ResponseEntity<Countries> getCountries() {
+    public ResponseEntity<CountriesDTO> getCountries() {
         return new ResponseEntity<>(countryService.getCountries(), HttpStatus.OK);
     }
 
     @GetMapping("/countries/{countryName}")
-    public ResponseEntity<Country> getCountry(@PathVariable String countryName) {
+    public ResponseEntity<CountryDTO> getCountry(@PathVariable String countryName) {
         return new ResponseEntity<>(countryService.getCountry(countryName), HttpStatus.OK);
     }
 }

@@ -1,12 +1,11 @@
 package ct.frontend.integration.service;
 
-import com.google.protobuf.InvalidProtocolBufferException;
 import ct.frontend.integration.web.client.StateClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import static coronavirus.tracker.core.api.CoronavirusTrackerCoreProtos.State;
-import static coronavirus.tracker.core.api.CoronavirusTrackerCoreProtos.States;
+import static coronavirus.tracker.core.api.CoronavirusTrackerCoreProtos.StateDTO;
+import static coronavirus.tracker.core.api.CoronavirusTrackerCoreProtos.StatesDTO;
 
 @Component
 @RequiredArgsConstructor
@@ -14,11 +13,11 @@ public class StateService {
 
     private final StateClient stateClient;
 
-    public States getStates(String countryName) {
+    public StatesDTO getStates(String countryName) {
         return stateClient.getStates(countryName);
     }
 
-    public State getState(String countryName, String stateName) {
+    public StateDTO getState(String countryName, String stateName) {
         return stateClient.getState(countryName, stateName);
     }
 }

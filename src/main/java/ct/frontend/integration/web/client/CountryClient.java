@@ -5,8 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import static coronavirus.tracker.core.api.CoronavirusTrackerCoreProtos.Countries;
-import static coronavirus.tracker.core.api.CoronavirusTrackerCoreProtos.Country;
+import static coronavirus.tracker.core.api.CoronavirusTrackerCoreProtos.CountriesDTO;
+import static coronavirus.tracker.core.api.CoronavirusTrackerCoreProtos.CountryDTO;
 
 @Component
 @RequiredArgsConstructor
@@ -15,13 +15,13 @@ public class CountryClient {
     private final RestTemplate restTemplate;
     private final AppProperties appProperties;
 
-    public Countries getCountries() {
-        return restTemplate.getForObject(appProperties.getClientUrl() + "/countries", Countries.class);
+    public CountriesDTO getCountries() {
+        return restTemplate.getForObject(appProperties.getClientUrl() + "/countries", CountriesDTO.class);
     }
 
-    public Country getCountry(String countryName) {
+    public CountryDTO getCountry(String countryName) {
         return restTemplate.getForObject(
                 String.format(appProperties.getClientUrl() + "/countries/%s", countryName),
-                Country.class);
+                CountryDTO.class);
     }
 }

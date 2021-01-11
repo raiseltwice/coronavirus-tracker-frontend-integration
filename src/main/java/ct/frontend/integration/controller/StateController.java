@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import static coronavirus.tracker.core.api.CoronavirusTrackerCoreProtos.States;
-import static coronavirus.tracker.core.api.CoronavirusTrackerCoreProtos.State;
+import static coronavirus.tracker.core.api.CoronavirusTrackerCoreProtos.StatesDTO;
+import static coronavirus.tracker.core.api.CoronavirusTrackerCoreProtos.StateDTO;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,12 +22,12 @@ public class StateController {
     private final StateService stateService;
 
     @GetMapping("/countries/{countryName}/states")
-    public ResponseEntity<States> getStates(@PathVariable String countryName) {
+    public ResponseEntity<StatesDTO> getStates(@PathVariable String countryName) {
         return new ResponseEntity<>(stateService.getStates(countryName), HttpStatus.OK);
     }
 
     @GetMapping("/countries/{countryName}/states/{stateName}")
-    public ResponseEntity<State> getStateByName(@PathVariable String countryName,
+    public ResponseEntity<StateDTO> getStateByName(@PathVariable String countryName,
                                                  @PathVariable String stateName) {
         return new ResponseEntity<>(stateService.getState(countryName, stateName), HttpStatus.OK);
     }

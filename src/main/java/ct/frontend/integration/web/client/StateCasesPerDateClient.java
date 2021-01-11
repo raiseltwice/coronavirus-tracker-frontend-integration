@@ -5,8 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import static coronavirus.tracker.core.api.CoronavirusTrackerCoreProtos.CasesPerDate;
-import static coronavirus.tracker.core.api.CoronavirusTrackerCoreProtos.CasesPerDateCollection;
+import static coronavirus.tracker.core.api.CoronavirusTrackerCoreProtos.CasesPerDateDTO;
+import static coronavirus.tracker.core.api.CoronavirusTrackerCoreProtos.CasesPerDateCollectionDTO;
 
 @Component
 @RequiredArgsConstructor
@@ -15,16 +15,16 @@ public class StateCasesPerDateClient {
     private final RestTemplate restTemplate;
     private final AppProperties appProperties;
 
-    public CasesPerDateCollection getStateCasesPerDateCollection(String countryName, String stateName) {
+    public CasesPerDateCollectionDTO getStateCasesPerDateCollection(String countryName, String stateName) {
         return restTemplate.getForObject(
                 String.format(appProperties.getClientUrl() + "/countries/%s/states/%s/cases-per-date", countryName, stateName),
-                CasesPerDateCollection.class);
+                CasesPerDateCollectionDTO.class);
     }
 
-    public CasesPerDate getStateCasesPerDate(String countryName, String stateName, String date) {
+    public CasesPerDateDTO getStateCasesPerDate(String countryName, String stateName, String date) {
         return restTemplate.getForObject(
                 String.format(appProperties.getClientUrl() +
                         "/countries/%s/states/%s/cases-per-date/%s", countryName, stateName, date),
-                CasesPerDate.class);
+                CasesPerDateDTO.class);
     }
 }

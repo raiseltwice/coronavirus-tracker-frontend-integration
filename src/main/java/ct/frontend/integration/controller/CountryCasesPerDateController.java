@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import static coronavirus.tracker.core.api.CoronavirusTrackerCoreProtos.CasesPerDate;
-import static coronavirus.tracker.core.api.CoronavirusTrackerCoreProtos.CasesPerDateCollection;
+import static coronavirus.tracker.core.api.CoronavirusTrackerCoreProtos.CasesPerDateDTO;
+import static coronavirus.tracker.core.api.CoronavirusTrackerCoreProtos.CasesPerDateCollectionDTO;
 
 @RestController
 @RequiredArgsConstructor
@@ -20,14 +20,14 @@ public class CountryCasesPerDateController {
     private final CountryCasesPerDateService countryCasesPerDateService;
 
     @GetMapping("/countries/{countryName}/cases-per-date")
-    public ResponseEntity<CasesPerDateCollection> getCountryCasesPerDateCollection(@PathVariable String countryName) {
+    public ResponseEntity<CasesPerDateCollectionDTO> getCountryCasesPerDateCollection(@PathVariable String countryName) {
         return new ResponseEntity<>(
                 countryCasesPerDateService.getCountryCasesPerDateCollection(countryName),
                 HttpStatus.OK);
     }
 
     @GetMapping("/countries/{countryName}/cases-per-date/{date}")
-    public ResponseEntity<CasesPerDate> getCountryCasesPerDateByDate(@PathVariable String countryName,
+    public ResponseEntity<CasesPerDateDTO> getCountryCasesPerDateByDate(@PathVariable String countryName,
                                                                      @PathVariable String date) {
         return new ResponseEntity<>(
                 countryCasesPerDateService.getCountryCasesPerDate(countryName, date),
